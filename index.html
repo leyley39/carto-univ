@@ -89,7 +89,7 @@
     }
 
     .no-fill path {
-      fill : #BD906F;
+      fill : transparent;
       border : none;
     }
 
@@ -97,12 +97,12 @@
       pointer-events: auto;
     }
     #slider div , .noUi-marker{
-      color: #D4877F;
+      color: #000000;
     }
     #slider .noUi-marker {
       background: #D4877F
     }
-
+    
     .tooltip {
       color: #705540;
       position: absolute;
@@ -200,7 +200,8 @@
     // add zoom controls
     L.control.zoom({ position:'topright' }).addTo(map);
 
-    let url = 'http://tile.thunderforest.com/transport/{z}/{x}/{y}.png'
+    let url = 'http://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.png'
+    /*let url = 'http://tile.thunderforest.com/transport/{z}/{x}/{y}.png'*/
     let attribution = '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 
     const tiles = L.tileLayer(url, {
@@ -208,7 +209,7 @@
         minZoom: 0,
       	maxZoom: 20,
       	ext: 'png'
-    })
+    }).addTo(map)
 
 
     // create d3 map layout from leaflet
@@ -237,7 +238,7 @@
     // load all needed files
     d3.queue()
       // map created from https://geojson-maps.kyd.com.au/
-      .defer(d3.json, "data/europe.geo.json")
+      .defer(d3.json, "data/custom.geo(1).json")
       // capitals at https://www.npmjs.com/package/capitals-coordinates
       .defer(d3.json, "data/europe-capitals.geo.json")
       // name and colors for the caption
